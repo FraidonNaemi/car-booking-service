@@ -1,7 +1,11 @@
 package com.carBooking.Car;
 
 public class CarService {
-    private CarDAO carDAO = new CarDAO();
+    private CarDAO carDAO;
+
+    public CarService(CarDAO carDAO) {
+        this.carDAO = carDAO;
+    }
 
     public Car[] getAllCars() {
         return carDAO.getAllCars();

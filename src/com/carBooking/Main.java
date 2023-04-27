@@ -1,9 +1,14 @@
 package com.carBooking;
 
 import com.carBooking.Booking.CarBooking;
+import com.carBooking.Booking.CarBookingDAO;
 import com.carBooking.Booking.CarBookingService;
 import com.carBooking.Car.Car;
+import com.carBooking.Car.CarDAO;
+import com.carBooking.Car.CarService;
 import com.carBooking.User.User;
+import com.carBooking.User.UserDAO;
+import com.carBooking.User.UserFileDataAccessService;
 import com.carBooking.User.UserService;
 
 import java.util.Scanner;
@@ -11,9 +16,14 @@ import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
+        UserDAO userDAO = new UserFileDataAccessService();
+        UserService userService = new UserService(userDAO);
 
-        UserService userService = new UserService();
-        CarBookingService carBookingService = new CarBookingService();
+        CarBookingDAO carBookingDAO = new CarBookingDAO();
+        CarDAO carDAO = new CarDAO();
+
+        CarService carService = new CarService(carDAO);
+        CarBookingService carBookingService = new CarBookingService(carBookingDAO, carService);
 
         Scanner scanner = new Scanner(System.in);
 
