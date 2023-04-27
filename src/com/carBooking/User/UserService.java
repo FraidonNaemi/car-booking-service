@@ -3,7 +3,7 @@ package com.carBooking.User;
 import java.util.UUID;
 
 public class UserService {
-    private UserDAO userDAO = new UserDAO();
+    private UserDAO userDAO = new UserFileDataAccessService();
 
     public User[] getAllUsers() {
         return userDAO.getAllUsers();
@@ -11,7 +11,7 @@ public class UserService {
 
     public User getUserById(UUID id) {
         for(User user : getAllUsers()) {
-            if(id.equals(user.getId())) {
+            if(user.getId().equals(id)) {
                 return user;
             }
         }
