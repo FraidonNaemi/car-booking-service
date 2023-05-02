@@ -5,6 +5,9 @@ import com.carBooking.Car.CarService;
 import com.carBooking.User.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class CarBookingService {
@@ -17,9 +20,9 @@ public class CarBookingService {
     }
 
     public UUID bookCar(User user, String regNumber) {
-        Car[] availableCars = getAvailableCars();
+        List<Car> availableCars = getAvailableCars();
 
-        if (availableCars.length == 0) {
+        if (availableCars.isEmpty()) {
             throw new IllegalStateException("No car available for renting");
         }
 
@@ -37,72 +40,40 @@ public class CarBookingService {
         throw new IllegalStateException("Already booked. car with regNumber " + regNumber);
     }
 
-    public Car[] getUserBookedCars(UUID userId) {
-        CarBooking[] carBookings = carBookingDAO.getCarBookings();
+    public List<Car> getUserBookedCars(UUID userId) {
+        List<CarBooking> carBookings = carBookingDAO.getCarBookings();
+        List<Car> userCars = new ArrayList<>();
 
-        int numberOfBookingsForUser = 0;
-
-        for (CarBooking cb : carBookings) {
-            if (cb != null && cb.getUser().getId().equals(userId)) {
-                ++numberOfBookingsForUser;
-            }
-        }
-
-        if (numberOfBookingsForUser == 0) {
-            return new Car[0];
-        }
-
-        Car[] userCars = new Car[numberOfBookingsForUser];
-
-        int index = 0;
         for (CarBooking carBooking : carBookings) {
             if (carBooking != null && carBooking.getUser().getId().equals(userId)) {
-                userCars[index++] = carBooking.getCar();
+                userCars.add(carBooking.getCar());
             }
         }
         return userCars;
     }
 
-    public Car[] getAvailableCars() {
+    public List<Car> getAvailableCars() {
         return getCars(carService.getAllCars());
     }
 
-    public Car[] getAvailableElectricCars() {
+    public List<Car> getAvailableElectricCars() {
         return getCars(carService.getAllElectricCars());
     }
 
-    private Car[] getCars(Car[] cars) {
+    private List<Car> getCars(List<Car> cars) {
         // no cars in the system yet
-        if (cars.length == 0) {
-            return new Car[0];
+        if (cars.isEmpty()) {
+            return Collections.emptyList();
         }
 
-        CarBooking[] carBookings = carBookingDAO.getCarBookings();
+        List<CarBooking> carBookings = carBookingDAO.getCarBookings();
 
         // no bookings yet therefore all cars all available
-        if (carBookings.length == 0) {
+        if (carBookings.isEmpty()) {
             return cars;
         }
 
-        int availableCarsCount = 0;
-
-        for (Car car : cars) {
-            // checking if the car is booked, if not then its available
-            boolean booked = false;
-            for (CarBooking carBooking : carBookings) {
-                if (carBooking == null || !carBooking.getCar().equals(car)) {
-                    continue;
-                }
-                booked = true;
-            }
-
-            if (!booked) {
-                ++availableCarsCount;
-            }
-        }
-
-        Car[] availableCars = new Car[availableCarsCount];
-        int index = 0;
+        List<Car> availableCars = new ArrayList<>();
 
         // populate available cars
         for (Car car : cars) {
@@ -117,35 +88,13 @@ public class CarBookingService {
             }
 
             if (!booked) {
-                availableCars[index++] = car;
+                availableCars.add(car);
             }
         }
         return availableCars;
     }
 
-    public CarBooking[] getBookings() {
-        CarBooking[] carBookings = carBookingDAO.getCarBookings();
-
-        int numberOfBookings = 0;
-
-        for (CarBooking cb : carBookings) {
-            if (cb != null) {
-                ++numberOfBookings;
-            }
-        }
-
-        if (numberOfBookings == 0) {
-            return new CarBooking[0];
-        }
-
-        CarBooking[] bookings = new CarBooking[numberOfBookings];
-
-        int index = 0;
-        for (CarBooking carBooking : carBookings) {
-            if (carBooking != null) {
-                bookings[index++] = carBooking;
-            }
-        }
-        return bookings;
+    public List<CarBooking> getBookings() {
+        return carBookingDAO.getCarBookings();
     }
 }

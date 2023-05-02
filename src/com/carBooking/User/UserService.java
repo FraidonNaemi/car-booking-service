@@ -1,5 +1,6 @@
 package com.carBooking.User;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class UserService {
@@ -9,7 +10,7 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public User[] getAllUsers() {
+    public ArrayList<User> getAllUsers() {
         return userDAO.getAllUsers();
     }
 

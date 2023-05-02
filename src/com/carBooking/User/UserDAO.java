@@ -1,5 +1,7 @@
 package com.carBooking.User;
 
+import java.util.ArrayList;
+
 public interface UserDAO {
-    User[] getAllUsers();
+    ArrayList<User> getAllUsers();
 }
