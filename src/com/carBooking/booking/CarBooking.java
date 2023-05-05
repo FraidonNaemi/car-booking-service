@@ -1,7 +1,7 @@
-package com.carBooking.Booking;
+package com.carBooking.booking;
 
-import com.carBooking.Car.Car;
-import com.carBooking.User.User;
+import com.carBooking.car.Car;
+import com.carBooking.user.User;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

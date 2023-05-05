@@ -1,12 +1,10 @@
-package com.carBooking.Car;
+package com.carBooking.car;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CarService {
-    private CarDAO carDAO;
+    private final CarDAO carDAO;
 
     public CarService(CarDAO carDAO) {
         this.carDAO = carDAO;
@@ -28,19 +26,11 @@ public class CarService {
 
     // check and get all electric cars
     public List<Car> getAllElectricCars() {
-        List<Car> cars = getAllCars();
+        List<Car> electricCars = getAllCars()
+                .stream()
+                .filter(car -> car.isElectric())
+                .collect(Collectors.toList());
 
-        if(cars.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        List<Car> electricCars = new ArrayList<>();
-
-        for(Car car : cars) {
-            if(car.isElectric()) {
-                electricCars.add(car);
-            }
-        }
         return electricCars;
     }
 }

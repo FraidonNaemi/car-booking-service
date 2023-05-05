@@ -1,17 +1,16 @@
 package com.carBooking;
 
-import com.carBooking.Booking.CarBooking;
-import com.carBooking.Booking.CarBookingDAO;
-import com.carBooking.Booking.CarBookingService;
-import com.carBooking.Car.Car;
-import com.carBooking.Car.CarDAO;
-import com.carBooking.Car.CarService;
-import com.carBooking.User.User;
-import com.carBooking.User.UserDAO;
-import com.carBooking.User.UserFileDataAccessService;
-import com.carBooking.User.UserService;
+import com.carBooking.booking.CarBooking;
+import com.carBooking.booking.CarBookingDAO;
+import com.carBooking.booking.CarBookingService;
+import com.carBooking.car.Car;
+import com.carBooking.car.CarDAO;
+import com.carBooking.car.CarService;
+import com.carBooking.user.User;
+import com.carBooking.user.UserDAO;
+import com.carBooking.user.UserFileDataAccessService;
+import com.carBooking.user.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -64,7 +63,7 @@ public class Main {
     }
 
     private static void displayAllUsers(UserService userService) {
-        ArrayList<User> users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         if (users.isEmpty()) {
             System.out.println("❌ No users in the system");
             return;

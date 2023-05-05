@@ -1,19 +1,20 @@
-package com.carBooking.User;
+package com.carBooking.user;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
 public class UserFileDataAccessService implements UserDAO{
 
     @Override
-    public ArrayList<User> getAllUsers() {
+    public List<User> getAllUsers() {
         File file = new File("src/com/carBooking/users.csv");
 
         // as there are four users in users.csv, we put the array size 4
-        ArrayList<User> users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
 
         try {
             Scanner scanner = new Scanner(file);

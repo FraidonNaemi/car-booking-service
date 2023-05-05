@@ -1,4 +1,4 @@
-package com.carBooking.Car;
+package com.carBooking.car;
 
 public enum Brand {
     TESLA,

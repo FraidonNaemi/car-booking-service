@@ -1,4 +1,4 @@
-package com.carBooking.Booking;
+package com.carBooking.booking;
 
 import java.util.ArrayList;
 import java.util.List;
