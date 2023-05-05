@@ -11,7 +11,8 @@ public class UserFileDataAccessService implements UserDAO{
 
     @Override
     public List<User> getAllUsers() {
-        File file = new File("src/com/carBooking/users.csv");
+        // File file = new File("src/com/carBooking/users.csv");
+        File file = new File(getClass().getClassLoader().getResource("users.csv").getPath());
 
         // as there are four users in users.csv, we put the array size 4
         List<User> users = new ArrayList<>();

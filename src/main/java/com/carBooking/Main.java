@@ -6,10 +6,7 @@ import com.carBooking.booking.CarBookingService;
 import com.carBooking.car.Car;
 import com.carBooking.car.CarDAO;
 import com.carBooking.car.CarService;
-import com.carBooking.user.User;
-import com.carBooking.user.UserDAO;
-import com.carBooking.user.UserFileDataAccessService;
-import com.carBooking.user.UserService;
+import com.carBooking.user.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +14,7 @@ import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
-        UserDAO userDAO = new UserFileDataAccessService();
+        UserDAO userDAO = new UserFakerDataAccessService();
         UserService userService = new UserService(userDAO);
 
         CarBookingDAO carBookingDAO = new CarBookingDAO();
