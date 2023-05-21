@@ -2,6 +2,6 @@ package com.carBooking.user;
 
 import java.util.List;
 
-public interface UserDAO {
+public interface UserDao {
     List<User> getAllUsers();
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class UserArrayDataAccessService implements UserDAO{
+public class UserArrayDataAccessService implements UserDao {
     private static final List<User> users = new ArrayList<>();
 
     static {

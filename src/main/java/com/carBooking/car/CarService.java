@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CarService {
-    private final CarDAO carDAO;
+    private final CarDao carDao;
 
-    public CarService(CarDAO carDAO) {
-        this.carDAO = carDAO;
+    public CarService(CarDao carDao) {
+        this.carDao = carDao;
     }
 
     public List<Car> getAllCars() {
-        return carDAO.getAllCars();
+        return carDao.getAllCars();
     }
 
     // get car by regNumber

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class UserFileDataAccessService implements UserDAO{
+public class UserFileDataAccessService implements UserDao {
 
     @Override
     public List<User> getAllUsers() {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class UserFakerDataAccessService implements UserDAO{
+public class UserFakerDataAccessService implements UserDao {
     @Override
     public List<User> getAllUsers() {
         Faker faker = new Faker();

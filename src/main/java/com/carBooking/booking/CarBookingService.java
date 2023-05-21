@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class CarBookingService {
-    private final CarBookingDAO carBookingDAO;
+    private final CarBookingDao carBookingDao;
     private final CarService carService;
 
-    public CarBookingService(CarBookingDAO carBookingDAO, CarService carService) {
-        this.carBookingDAO = carBookingDAO;
+    public CarBookingService(CarBookingDao carBookingDao, CarService carService) {
+        this.carBookingDao = carBookingDao;
         this.carService = carService;
     }
 
@@ -32,7 +32,7 @@ public class CarBookingService {
                 Car car = carService.getCar(regNumber);
                 UUID bookingId = UUID.randomUUID();
 
-                carBookingDAO.book(new CarBooking(bookingId, user, car, LocalDateTime.now()));
+                carBookingDao.book(new CarBooking(bookingId, user, car, LocalDateTime.now()));
 
                 return bookingId;
             }
@@ -41,7 +41,7 @@ public class CarBookingService {
     }
 
     public List<Car> getUserBookedCars(UUID userId) {
-        List<CarBooking> carBookings = carBookingDAO.getCarBookings();
+        List<CarBooking> carBookings = carBookingDao.getCarBookings();
         List<Car> userCars = new ArrayList<>();
 
         for (CarBooking carBooking : carBookings) {
@@ -66,7 +66,7 @@ public class CarBookingService {
             return Collections.emptyList();
         }
 
-        List<CarBooking> carBookings = carBookingDAO.getCarBookings();
+        List<CarBooking> carBookings = carBookingDao.getCarBookings();
 
         // no bookings yet therefore all cars all available
         if (carBookings.isEmpty()) {
@@ -95,6 +95,6 @@ public class CarBookingService {
     }
 
     public List<CarBooking> getBookings() {
-        return carBookingDAO.getCarBookings();
+        return carBookingDao.getCarBookings();
     }
 }
